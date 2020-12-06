@@ -16,7 +16,7 @@
     <artifactUrl>FILL_ME</artifactUrl>
     <artifactSnapshotUrl>FILL_ME</artifactSnapshotUrl>
     <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-    <revision>2.LOCAL.0-SNAPSHOT</revision>
+    <revision>2.0.0-SNAPSHOT</revision>
     <artifactReleaseUrl>FILL_ME</artifactReleaseUrl>
     <artifactSnapshotsUrl>FILL_ME</artifactSnapshotsUrl>
   </properties>
