@@ -89,12 +89,40 @@
   </dependencyManagement>
 
   <profiles>
+<!--    <profile>-->
+<!--      <id>sonatype-oss-release</id>-->
+<!--      <properties>-->
+<!--        <skip-enforce-jdk8>false</skip-enforce-jdk8>-->
+<!--      </properties>-->
+<!--    </profile>-->
     <profile>
-      <id>sonatype-oss-release</id>
-      <properties>
-        <skip-enforce-jdk8>false</skip-enforce-jdk8>
-      </properties>
-    </profile>
+        <id>modify-poms</id>
+
+        <activation>
+          <jdk>[1.6,)</jdk>
+        </activation>
+
+        <build>
+          <plugins>
+            <plugin>
+              <groupId>com.outbrain.swinfra</groupId>
+              <artifactId>ci-friendly-flatten-maven-plugin</artifactId>
+              <version>1.0.6</version>
+              <configuration>
+              </configuration>
+              <executions>
+                <execution>
+                  <goals>
+                    <goal>clean</goal>
+                    <goal>flatten</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </build>
+      </profile>
+
   </profiles>
 
 
@@ -181,6 +209,7 @@
         </executions>
 
         <configuration>
+          <!--<createDependencyReducedPom>false</createDependencyReducedPom>-->
           <minimizeJar>false</minimizeJar>
           <shadedArtifactAttached>false</shadedArtifactAttached>
           <createSourcesJar>true</createSourcesJar>
@@ -234,18 +263,6 @@
           </execution>
         </executions>
       </plugin>
-<!--      <plugin>-->
-<!--        <groupId>org.jacoco</groupId>-->
-<!--        <artifactId>jacoco-maven-plugin</artifactId>-->
-<!--        <version>0.8.5</version>-->
-<!--        <executions>-->
-<!--          <execution>-->
-<!--            <goals>-->
-<!--              <goal>prepare-agent</goal>-->
-<!--            </goals>-->
-<!--          </execution>-->
-<!--        </executions>-->
-<!--      </plugin>-->
 
       <!-- Require releases to be done with java 8-->
       <plugin>
